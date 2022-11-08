@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LoFi Pomodoro</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://kit.fontawesome.com/8e7b84f57c.js" crossorigin="anonymous"></script>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+  <div class="music-container">
+    <div class="music-info">
+      <p class="song-title">Spirit Blossom</p>
+      <div class="progress-container">
+        <div class="progress"></div>
+      </div>
+    </div>
+    <audio src="assets/music/spirit-blossom.mp3" id="audio"></audio>
+    <div class="img-container">
+      <img src="assets/images/spirit-blossom.jpg" alt="music cover" id="cover" width="110" height="110">
+    </div>
+    <div class="navigation">
+      <button id="prev" type="button" class="btn"><i class="fas fa-backward"></i></button>
+      <button id="play" type="button" class="btn btn-big"><i class="fas fa-play"></i></button>
+      <button id="next" type="button" class="btn"><i class="fas fa-forward"></i></button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
