@@ -12,6 +12,22 @@
 </head>
 
 <body>
+  <nav>
+    <ul class="pomodoro-menu">
+      <li><button type="button" class="active" data-mode="pomodoro">Pomodoro</button></li>
+      <li><button type="button" data-mode="shortBreak">Short Break</button></li>
+      <li><button type="button" data-mode="longBreak">Long Break</button></li>
+    </ul>
+  </nav>
+  <div class="pomodoro-container">
+    <svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="150" cy="150" r="150" fill="none" class="pomodoro-progress-container" />
+      <circle cx="150" cy="150" r="135" fill="none" class="pomodoro-progress-bar" />
+    </svg>
+    <p class="clock">00:30</p>
+    <button type="button" id="control" data-action="start">Start</button>
+    <audio src="" id="notification"></audio>
+  </div>
   <div class="music-container">
     <div class="music-info">
       <p class="song-title">Spirit Blossom</p>
