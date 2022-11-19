@@ -13,7 +13,15 @@ Pomodoro timer with LoFi music player create with HTML, CSS/SASS, and JavaScript
 - SASS
 - JavaScript
 
-## 💡 Useful resources
+## 💡 Features
+
+- Pomodoro timer: 25min
+- Short (5min) and long (15min) break timers
+- Notification sound when time is up
+- Circular progress bar that updates every second and represents how far through their timer the user is
+- Music player: play and pause song, skip to the next song, go back to the previous song
+
+## 📚 Useful resources
 
 - [Brad Traversy](https://www.youtube.com/watch?v=QTHRWGn_sJw&ab_channel=TraversyMedia): Music player | Vanilla JavaScript
 
