@@ -1,12 +1,13 @@
 // POMODORO
-
+// timer in seconds
 const timer = {
   pomodoro: 1500,
   shortBreak: 300,
   longBreak: 900
 };
+// initial mode is pomodoro
 let mode = 'pomodoro';
-let totalTime = 1500;
+let totalTime = 1500; // 25min
 let timeRemaining;
 let pomodoroInterval;
 let pomodoroRounds = 0;
@@ -152,69 +153,58 @@ pomodoroMenu.addEventListener('click', e => {
 const songs = [
   {
     title: 'Spring Blossom',
-    source: 'spirit-blossom.mp3',
-    cover: 'spirit-blossom.jpg'
+    fileName: 'spirit-blossom'
   },
   {
     title: 'Thousand Miles',
-    source: 'chillhop-thousand-miles.mp3',
-    cover: 'chillhop-thousand-miles.jpg'
+    fileName: 'chillhop-thousand-miles'
   },
   {
     title: 'Motivation',
-    source: 'acoustic-motivation.mp3',
-    cover: 'acoustic-motivation.jpg'
+    fileName: 'acoustic-motivation'
   },
   {
     title: 'Lofi Song',
-    source: 'chill-lofi-song.mp3',
-    cover: 'chill-lofi-song.jpg'
+    fileName: 'chill-lofi-song'
   },
   {
     title: 'In the room',
-    source: 'in-the-room.mp3',
-    cover: 'in-the-room.jpg'
+    fileName: 'in-the-room'
   },
   {
     title: 'Lofi',
-    source: 'lofi.mp3',
-    cover: 'lofi.jpg'
+    fileName: 'lofi'
   },
   {
     title: 'Rain and Nostalgia',
-    source: 'rain-and-nostalgia.mp3',
-    cover: 'rain-and-nostalgia.jpg'
+    fileName: 'rain-and-nostalgia'
   },
   {
     title: 'Sunset Vibes',
-    source: 'sunset-vibes.mp3',
-    cover: 'sunset-vibes.jpg'
+    fileName: 'sunset-vibes'
   },
   {
     title: 'Travel to the City',
-    source: 'travel-to-the-city.mp3',
-    cover: 'travel-to-the-city.jpg'
+    fileName: 'travel-to-the-city'
   },
   {
-    title: 'Where the light is',
-    source: 'where-the-light-is.mp3',
-    cover: 'where-the-light-is.jpg'
+    title: 'Where the Light is',
+    fileName: 'where-the-light-is'
   },
   {
     title: 'The Beat of Nature',
-    source: 'the-beat-of-nature.mp3',
-    cover: 'the-beat-of-nature.jpg'
+    fileName: 'the-beat-of-nature'
   },
   {
-    title: 'To meet the light',
-    source: 'to-meet-the-light.mp3',
-    cover: 'to-meet-the-light.jpg'
+    title: 'To Meet the Light',
+    fileName: 'to-meet-the-light'
   }
 ];
 
-let songIndex = 0;
 const audio = document.getElementById('audio');
 const musicContainer = document.querySelector('.music-container');
+// keep track of songs
+let songIndex = 0;
 
 const playSong = () => {
   musicContainer.classList.add('play');
@@ -232,9 +222,9 @@ const pauseSong = () => {
 };
 
 const loadSong = () => {
-  const { title, source, cover } = songs[songIndex];
-  audio.src = `assets/music/${source}`;
-  document.getElementById('cover').src = `assets/images/${cover}`;
+  const { title, fileName } = songs[songIndex];
+  audio.src = `assets/music/${fileName}.mp3`;
+  document.getElementById('cover').src = `assets/images/${fileName}.jpg`;
   document.querySelector('.song-title').textContent = title;
 };
 
@@ -266,7 +256,7 @@ const updateProgress = e => {
 const setProgress = function (e) {
   // get total width of the progress container, this = progress container
   const totalWidth = this.clientWidth;
-  // get the coordinate where the click event happened inside the progress container element, this will be the new progress width
+  // get the x coordinate where the click event happened inside the progress container element, this will be the new progress width
   const progressWidth = e.offsetX;
   const songDuration = audio.duration;
   // set the new currentTime
