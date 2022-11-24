@@ -6,6 +6,14 @@
   box-sizing: border-box;
 }
 
+:root {
+  --text-color: #372f4d;
+  --primary-color: #bfb3e6;
+  --secondary-color: #8b77c5;
+  --light-color: #d9d3ec;
+  --accent-color: #6c5ba5;
+}
+
 html {
   font-size: 62.5%;
 }
@@ -18,7 +26,9 @@ body {
   display: grid;
   place-items: center;
   font-family: 'Lato', sans-serif;
-  color: #372f4d;
+  color: var(--text-color);
+  padding-block: 2rem 1.5rem;
+  gap: 4rem;
 }
 
 img {
@@ -31,6 +41,11 @@ button {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 // pomodoro
@@ -56,7 +71,7 @@ nav {
     transition: all 0.3s ease-in-out;
   }
   .active {
-    background-color: #bfb3e6;
+    background-color: var(--primary-color);
   }
 }
 
@@ -68,7 +83,7 @@ svg {
 }
 
 .pomodoro-progress-bar {
-  stroke: #bfb3e6;
+  stroke: var(--primary-color);
   stroke-width: 1rem;
   stroke-linecap: round;
 }
@@ -85,15 +100,14 @@ svg {
   gap: 2rem;
   text-align: center;
   z-index: 1;
+  font-weight: 700;
   .clock {
     font-size: 7rem;
-    font-weight: 700;
   }
   button {
     text-transform: uppercase;
     letter-spacing: 0.3rem;
-    font-weight: 700;
-    color: #866ddb;
+    color: var(--accent-color);
     font-size: 1.8rem;
     max-width: 80%;
     margin: 0 auto;
@@ -101,8 +115,9 @@ svg {
   }
 }
 
-// music player  
+// music player
 .music-container {
+  margin-block: 7rem 2.5rem;
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 20px 20px 0 rgba(212, 190, 255, 0.8);
@@ -163,17 +178,17 @@ svg {
 }
 
 .btn {
-  color: #d9d3ec;
+  color: var(--light-color);
   font-size: 1.8rem;
   transition: color 0.2s linear;
 }
 
 .btn:hover {
-  color: darken(#d9d3ec, 25%);
+  color: var(--secondary-color);
 }
 
 .btn-big {
-  color: #bfb3e6;
+  color: var(--primary-color);
   font-size: 2.5rem;
 }
 
@@ -182,7 +197,7 @@ svg {
   top: 0;
   left: 5%;
   width: 90%;
-  background-color: #bfb3e6;
+  background-color: var(--primary-color);
   border-radius: 15px 15px 0 0;
   padding: 1rem 1.5rem 1rem 14rem;
   transform: translateY(-100%);
@@ -210,9 +225,25 @@ svg {
 }
 
 .progress {
-  background-color: #8b77c5;
+  background-color: var(--secondary-color);
   border-radius: 5px;
   height: 100%;
   width: 0%;
   transition: width 0.1s linear;
+}
+
+// footer
+
+footer {
+  font-size: 1.5rem;
+  align-self: end;
+  text-align: center;
+  p:first-child {
+    font-size: 1.6rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  a:hover {
+    color: var(--secondary-color);
+  }
 }
