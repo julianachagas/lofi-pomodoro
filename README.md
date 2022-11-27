@@ -1,6 +1,19 @@
 # LoFi Pomodoro 🎵
 
-Pomodoro timer with LoFi music player create with HTML, CSS/SASS, and JavaScript. This project was a great way to learn more about the HTML5 Audio API.
+Pomodoro timer with LoFi music player create with HTML, CSS/SASS, and JavaScript.
+
+This application implements the pomodoro technique and tells the user exactly when to work and when to take a break. You have 25-minute focus sessions followed by five-minute breaks and a longer 15-minute break after four consecutive focus sessions.
+
+The pomodoro process is as follows:
+
+- Start a 25-minute timer (pomodoro mode)
+- Work until the timer rings
+- Take a five minutes break (short break mode)
+- Every four pomodoros, take a longer break (15 minutes)
+
+The user can also use the music player to play some lofi songs during the pomodoro sessions and breaks.
+
+This project was a great way to learn more about the HTML5 Audio API and to practice JavaScript topics like DOM manipulation, event listeners, and timer functions (`setTimeout`, `setInterval`).
 
 ### Status
 
@@ -22,9 +35,10 @@ Pomodoro
   - Short break: 5 minutes
   - Long break: 15 minutes
 - User can pause and resume the timer
-- Notification sound when time is up
+- A notification sound is played when the timer is up and the app will transition to another mode.
 - Circular progress bar that updates every second and represents how far through their timer the user is
-- When a pomodoro interval is finished (25 minutes), the app will automatically switch to the short break timer. After the 4th pomodoro, it'll switch to the long break timer instead. Once a break is finished, the app will go back to the pomodoro timer.
+- The app will automatically start a short break session at the end of a pomodoro session and vice versa. After four pomodoro sessions, the app will switch to the long break mode. Once the break is finished, it'll go back to the pomodoro mode and start a new session.
+- The countdown timer is displayed in the page title. This allows the user to quickly see how many minutes are left in a session without switching tabs.
 
 Music Player
 
@@ -34,6 +48,8 @@ Music Player
 - The user is able to click anywhere on the song's progress bar and go to that point in the song
 
 ## 📚 Useful resources
+
+- Free music used in this project from [Pixabay](https://pixabay.com/)
 
 - [Brad Traversy](https://www.youtube.com/watch?v=QTHRWGn_sJw&ab_channel=TraversyMedia): Music player | Vanilla JavaScript
 
