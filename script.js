@@ -1,60 +1,46 @@
 // POMODORO
-// timer in seconds
+// time in seconds
 const timer = {
   pomodoro: 1500,
   shortBreak: 300,
   longBreak: 900
 };
-// initial mode is pomodoro
-let mode = 'pomodoro';
-let totalTime = 1500; // 25min
+
+let mode;
 let timeRemaining;
-let pomodoroInterval;
-let pomodoroRounds = 0;
-let pause = false;
+let pomodoroSessions = 0;
+let timerInterval;
 const controlBtn = document.querySelector('#control');
 
 const updateClock = time => {
   let min = Math.floor(time / 60);
   let sec = time - min * 60;
-  min = min < 10 ? `0${min}` : min;
-  sec = sec < 10 ? `0${sec}` : sec;
-  const element = document.querySelector('.clock');
-  element.textContent = `${min}:${sec}`;
+  min = min.toString().padStart(2, '0');
+  sec = sec.toString().padStart(2, '0');
+  const clock = document.querySelector('.clock');
+  clock.textContent = `${min}:${sec}`;
 };
 
-const startTimer = () => {
+const resetProgressBar = () => {
+  const pomodoroProgressBar = document.querySelector('.pomodoro-progress-bar');
+  pomodoroProgressBar.style.strokeWidth = `1rem`;
+  pomodoroProgressBar.style.strokeDasharray = `${Math.PI * 2 * 135}`;
+};
+
+const switchMode = newMode => {
+  mode = newMode;
   timeRemaining = timer[mode];
-  if (pause) {
-    updateTimer();
-    pause = false;
-  }
-  pomodoroInterval = setInterval(updateTimer, 1000);
-  controlBtn.dataset.action = 'pause';
-  controlBtn.textContent = 'pause';
-};
-
-const stopTimer = () => {
-  clearInterval(pomodoroInterval);
-  controlBtn.dataset.action = 'start';
-  controlBtn.textContent = 'start';
-};
-
-const playNotification = () => {
-  let count = 1;
-  const notification = document.getElementById('notification');
-  notification.src = 'assets/sound-effects/notification.mp3';
-  notification.play();
-  notification.addEventListener('ended', () => {
-    if (count < 3) {
-      count++;
-      notification.play();
-    }
+  updateClock(timeRemaining);
+  resetProgressBar();
+  const menuBtns = document.querySelectorAll('.pomodoro-menu button');
+  menuBtns.forEach(button => {
+    button.classList.toggle('active', button.dataset.mode === mode);
   });
 };
 
 const updatePomodoroProgress = () => {
   const progressBarPerimeter = 2 * Math.PI * 135;
+  const totalTime = timer[mode];
   const dashLength = (progressBarPerimeter * timeRemaining) / totalTime;
   const pomodoroProgressBar = document.querySelector('.pomodoro-progress-bar');
   // stroke-dasharray: first value = dash length, second value = gap length
@@ -66,74 +52,67 @@ const updatePomodoroProgress = () => {
   }
 };
 
-const switchMode = newMode => {
-  mode = newMode;
-  totalTime = timer[mode];
-  const clock = document.querySelector('.clock');
-  clock.textContent =
-    mode === 'shortBreak' ? '05:00' : mode === 'longBreak' ? '15:00' : '25:00';
-  const menuBtns = document.querySelectorAll('.pomodoro-menu button');
-  menuBtns.forEach(button => {
-    button.classList.toggle('active', button.dataset.mode === mode);
-  });
+const stopTimer = () => {
+  clearInterval(timerInterval);
+  controlBtn.dataset.action = 'start';
+  controlBtn.textContent = 'start';
 };
 
-const resetClock = () => {
-  timer.pomodoro = 1500;
-  timer.shortBreak = 300;
-  timer.longBreak = 900;
-  controlBtn.removeAttribute('disabled', '');
-  const pomodoroProgressBar = document.querySelector('.pomodoro-progress-bar');
-  pomodoroProgressBar.style.strokeWidth = `1rem`;
-  pomodoroProgressBar.style.strokeDasharray = `${Math.PI * 2 * 135}`;
-  pause = false;
-};
-
-const handleTimerEnd = () => {
-  stopTimer();
-  controlBtn.setAttribute('disabled', '');
-  playNotification();
-  setTimeout(() => {
-    resetClock();
-    if (mode !== 'pomodoro') {
-      switchMode('pomodoro');
-    } else {
-      pomodoroRounds++;
-      if (pomodoroRounds <= 3) {
-        switchMode('shortBreak');
-      } else {
-        switchMode('longBreak');
-        // reset pomodoro rounds, after the long break it'll restart the pomodoro circle
-        pomodoroRounds = 0;
-      }
-    }
-    startTimer();
-  }, 6000);
+const playNotification = source => {
+  const notification = document.getElementById('notification');
+  notification.src = `assets/sound-effects/${source}.mp3`;
+  notification.play();
 };
 
 const updateTimer = () => {
-  timer[mode] = timeRemaining--;
-  if (timer[mode] === 0) {
-    handleTimerEnd();
-    return;
-  }
+  timeRemaining--;
   updateClock(timeRemaining);
   updatePomodoroProgress();
+  if (timeRemaining <= 0) {
+    handleTimerEnd();
+  }
 };
 
+const startTimer = () => {
+  timerInterval = setInterval(updateTimer, 1000);
+  controlBtn.dataset.action = 'stop';
+  controlBtn.textContent = 'stop';
+};
+
+const handleTimerEnd = () => {
+  clearInterval(timerInterval);
+  playNotification('end');
+  switch (mode) {
+    case 'pomodoro':
+      pomodoroSessions++;
+      // if the number of completed pomodoro sessions is divisible by 4 (remainder equals to 0), switch to the long break mode
+      if (pomodoroSessions % 4 === 0) {
+        switchMode('longBreak');
+      } else {
+        switchMode('shortBreak');
+      }
+      break;
+    default:
+      switchMode('pomodoro');
+  }
+  startTimer();
+};
+
+// Event Listeners
+
+// initial (default) mode: pomodoro
+document.addEventListener('DOMContentLoaded', () => {
+  switchMode('pomodoro');
+});
+
+// start/stop button
 controlBtn.addEventListener('click', e => {
-  const action = e.target.dataset.action;
+  const { action } = e.target.dataset;
   if (action === 'start') {
+    playNotification('start');
     startTimer();
-    // safari fix: safari doesn't play audio without a user interaction first
-    // play a silent audio on first interaction on page, before we actually need the sound effect, then we modify the audio src
-    const notification = document.getElementById('notification');
-    notification.src =
-      'data:audio/mpeg;base64,SUQzBAAAAAABEVRYWFgAAAAtAAADY29tbWVudABCaWdTb3VuZEJhbmsuY29tIC8gTGFTb25vdGhlcXVlLm9yZwBURU5DAAAAHQAAA1N3aXRjaCBQbHVzIMKpIE5DSCBTb2Z0d2FyZQBUSVQyAAAABgAAAzIyMzUAVFNTRQAAAA8AAANMYXZmNTcuODMuMTAwAAAAAAAAAAAAAAD/80DEAAAAA0gAAAAATEFNRTMuMTAwVVVVVVVVVVVVVUxBTUUzLjEwMFVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQsRbAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVf/zQMSkAAADSAAAAABVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV';
-    notification.play();
   } else {
     stopTimer();
-    pause = true;
   }
 });
 
@@ -141,11 +120,8 @@ controlBtn.addEventListener('click', e => {
 const pomodoroMenu = document.querySelector('.pomodoro-menu');
 pomodoroMenu.addEventListener('click', e => {
   if (e.target.tagName !== 'BUTTON') return;
-  switchMode(e.target.dataset.mode);
   stopTimer();
-  resetClock();
-  // reset the rounds when user manually switch modes
-  pomodoroRounds = 0;
+  switchMode(e.target.dataset.mode);
 });
 
 // MUSIC PLAYER
