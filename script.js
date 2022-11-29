@@ -19,6 +19,9 @@ const updateClock = time => {
   sec = sec.toString().padStart(2, '0');
   const clock = document.querySelector('.clock');
   clock.textContent = `${min}:${sec}`;
+  // update the page title
+  const text = mode === 'pomodoro' ? 'Time to focus!' : 'Time for a break!';
+  document.title = `${min}:${sec} - ${text}`;
 };
 
 const resetProgressBar = () => {
