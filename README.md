@@ -46,7 +46,7 @@ Music Player
 
 - Display song's title, progress bar, and cover image
 - Play and pause songs
-- Switch songs
+- Switch songs (next/previous)
 - The user is able to click anywhere on the song's progress bar and go to that point in the song
 
 ## 💻 Demo
@@ -59,9 +59,9 @@ Music Player
 
 <img src="github/demo2.gif" alt=""/> <br/>
 
-- Music Player: play, pause, switch songs
+- Music Player: the user is able to play and pause a song, switch songs, and click on the progress bar
 
-<img src="github/demo-video.mp4" alt=""/> <br/>
+https://user-images.githubusercontent.com/76137636/204950512-1e1540cf-9766-4cba-b38d-0d3a075ca916.mp4
 
 ## 📚 Useful resources
 
