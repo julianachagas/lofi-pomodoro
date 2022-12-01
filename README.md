@@ -1,6 +1,6 @@
 # LoFi Pomodoro 🎵
 
-Pomodoro timer with LoFi music player create with HTML, CSS/SASS, and JavaScript.
+Pomodoro timer with a LoFi music player created with HTML, CSS/SASS, and JavaScript.
 
 This application implements the pomodoro technique and tells the user exactly when to work and when to take a break. You have 25-minute focus sessions followed by five-minute breaks and a longer 15-minute break after four consecutive focus sessions.
 
