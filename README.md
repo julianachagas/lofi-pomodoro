@@ -4,20 +4,22 @@ Pomodoro timer with LoFi music player create with HTML, CSS/SASS, and JavaScript
 
 This application implements the pomodoro technique and tells the user exactly when to work and when to take a break. You have 25-minute focus sessions followed by five-minute breaks and a longer 15-minute break after four consecutive focus sessions.
 
-The pomodoro process is as follows:
+The pomodoro process:
 
 - Start a 25-minute timer (pomodoro mode)
 - Work until the timer rings
-- Take a five minutes break (short break mode)
+- Take a break for 5 minutes (short break mode)
 - Every four pomodoros, take a longer break (15 minutes)
 
-The user can also use the music player to play some lofi songs during the pomodoro sessions and breaks.
+The user is able to use the music player to play lofi songs during the pomodoro sessions and breaks.
 
 This project was a great way to learn more about the HTML5 Audio API and to practice JavaScript topics like DOM manipulation, event listeners, and timer functions (`setTimeout`, `setInterval`).
 
-### Status
+<img src="github/screenshot.png" alt=""/> <br/>
 
-🚧 _in progress_ 🚧
+## 🔗 Link
+
+- [Live Demo](https://julianachagas.github.io/lofi-pomodoro)
 
 ## 🛠️ Technologies
 
@@ -34,8 +36,8 @@ Pomodoro
   - Pomodoro: 25 minutes
   - Short break: 5 minutes
   - Long break: 15 minutes
-- User can pause and resume the timer
-- A notification sound is played when the timer is up and the app will transition to another mode.
+- User can stop and start the timer
+- Audio notification at the end of a timer period
 - Circular progress bar that updates every second and represents how far through their timer the user is
 - The app will automatically start a short break session at the end of a pomodoro session and vice versa. After four pomodoro sessions, the app will switch to the long break mode. Once the break is finished, it'll go back to the pomodoro mode and start a new session.
 - The countdown timer is displayed in the page title. This allows the user to quickly see how many minutes are left in a session without switching tabs.
@@ -47,13 +49,25 @@ Music Player
 - Switch songs
 - The user is able to click anywhere on the song's progress bar and go to that point in the song
 
+## 💻 Demo
+
+- Pomodoro Session: start/stop the timer
+
+<img src="github/demo1.gif" alt=""/> <br/><br/>
+
+- The app automatically switches to the short break mode at the end of a pomodoro session
+
+<img src="github/demo2.gif" alt=""/> <br/>
+
+- Music Player: play, pause, switch songs
+
+<img src="github/demo-video.mp4" alt=""/> <br/>
+
 ## 📚 Useful resources
 
-- Free music used in this project from [Pixabay](https://pixabay.com/)
+- The royalty free music used in this project was collected from [Pixabay](https://pixabay.com/)
 
 - [Brad Traversy](https://www.youtube.com/watch?v=QTHRWGn_sJw&ab_channel=TraversyMedia): Music player | Vanilla JavaScript
-
-- [StackOverflow](https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari): Why can't JavaScript .play() audio files on iPhone safari?
 
 ## 👩🏻‍💻 Author
 
